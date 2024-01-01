@@ -106,6 +106,8 @@ static void onStartButtonDown( void ) {
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
         inputAddKeyDownEvent( vkey ); \
         inputAddKeyUpEvent( vkey ); \
+        inputAddMouseRightButton( true ); \
+        inputAddMouseRightButton( false ); \
     }
 
 MakeKeyFunc( XINPUT_GAMEPAD_B, VK_F1, VK_F5, true, onBButtonDown );
