@@ -17,19 +17,13 @@ typedef struct {
     void** proc;
 } D2Import;
 
-typedef int ( __stdcall* ShowCursor1Proc ) ( int show );
-typedef void ( __stdcall* ShowCursor2Proc ) ( int show );
 typedef HWND ( __stdcall* GetDiabloWindowProc ) ( void );
 
 void mainThread( LPVOID param );
 BOOL createMainThread( void );
-void showCursor( void );
-void hideCursor( void );
 BOOL diaboInterfaceInit( void );
 
 GetDiabloWindowProc GetDiabloWindow = NULL;
-ShowCursor1Proc ShowCursor1 = NULL;
-ShowCursor2Proc ShowCursor2 = NULL;
 
 HANDLE mainThreadHandle = NULL;
 HWND diabloWindow = NULL;
@@ -48,42 +42,11 @@ HMODULE dllD2Win = NULL;
 
 D2Import importTable[ ] = {
     {
-        10011,
-        &dllD2Win,
-        ( void** ) &ShowCursor1
-    },
-    {
-        10029,
-        &dllD2Win,
-        ( void** ) &ShowCursor2
-    },
-    {
         10027,
         &dllD2Gfx,
         ( void** ) &GetDiabloWindow
     }
 };
-
-#if 0
-void doTest( void ) {
-    INPUT mouseEvents[ 2 ];
-
-    sendKey( MapVirtualKeyEx( VK_F6, MAPVK_VK_TO_VSC, 0 ), TRUE );
-    sendKey( MapVirtualKeyEx( VK_F6, MAPVK_VK_TO_VSC, 0 ), FALSE );
-
-    setupMouseMoveRelative( 0, 0, MOUSEEVENTF_RIGHTDOWN, &mouseEvents[ 0 ] );
-    setupMouseMoveRelative( 0, 0, MOUSEEVENTF_RIGHTUP, &mouseEvents[ 1 ] );
-    SendInput( 2, mouseEvents, sizeof( INPUT ) );
-}
-#endif
-
-void showCursor( void ) {
-    //*shouldDrawCursor = 1;
-}
-
-void hideCursor( void ) {
-    //*shouldDrawCursor = 0;
-}
 
 BOOL diaboInterfaceInit( void ) {
     int i = 0;
