@@ -123,7 +123,7 @@ MakeKeyFunc( XINPUT_GAMEPAD_Y, VK_F4, VK_F8, true, onYButtonDown );
 MakeKeyFunc( XINPUT_GAMEPAD_DPAD_RIGHT, '1', '1', false, onDpadRightDown );
 MakeKeyFunc( XINPUT_GAMEPAD_DPAD_DOWN, '2', '2', false, onDpadDownDown );
 MakeKeyFunc( XINPUT_GAMEPAD_DPAD_LEFT, '3', '3', false, onDpadLeftDown );
-MakeKeyFunc( XINPUT_GAMEPAD_DPAD_UP, '3', '3', false, onDpadUpDown );
+MakeKeyFunc( XINPUT_GAMEPAD_DPAD_UP, '4', '4', false, onDpadUpDown );
 
 MakeKeyFunc( XINPUT_GAMEPAD_LEFT_THUMB, 'R', 'R', false, onLStickDown );
 MakeKeyFunc( XINPUT_GAMEPAD_RIGHT_THUMB, VK_TAB, VK_TAB, false, onRStickDown );

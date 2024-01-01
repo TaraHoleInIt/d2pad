@@ -132,19 +132,6 @@ void mainThread( LPVOID param ) {
                         ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
                     );
                 }
-
-                //if ( padIsStickMoving( &ls ) ) {
-                //    x = ( ( float ) midPoint.x ) + ( ls.dx * 100 );
-                //    y = ( ( float ) midPoint.y ) + ( ls.dy * 100 );
-
-                //    x = x / ( ( float ) screenSize.x );
-                //    y = y / ( ( float ) screenSize.y );
-
-                //    inputAddMouseMoveAbsolute(
-                //        ( int ) ( x * 65535.0f ),
-                //        ( int ) ( y * 65535.0f )
-                //    );
-                //}
             inputEnd( );
         }
 
