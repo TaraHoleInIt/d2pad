@@ -78,7 +78,7 @@ void mainThread( LPVOID param ) {
     setDefaultKeyBinds( );
 
     while ( shouldRun == TRUE ) {
-        diabloWindow = ( *GetDiabloWindow ) ( );
+        diabloWindow = FindWindow( NULL, L"Diablo II" );//( *GetDiabloWindow ) ( );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
             utilGetWindowMidpoint( diabloWindow, &midPoint );

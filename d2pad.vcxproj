@@ -132,7 +132,7 @@
       <AdditionalDependencies>xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(TargetPath) "C:\Program Files (x86)\Diablo II\"</Command>
+      <Command>copy $(TargetPath) "C:\Program Files (x86)\Diablo II\ProjectD2"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
