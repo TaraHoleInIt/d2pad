@@ -77,11 +77,14 @@ static void onLeftStickMoving( void ) {
     utilGetWindowMidpoint( diabloWindow, &midPoint );
     padGetLeftStick( &sm );
 
-    sm.dx *= 50.0f;
-    sm.dy *= 50.0f;
+    // HACKHACKHACK
+    midPoint.y-= 64;
+
+    sm.dx *= 100.0f;
+    sm.dy *= 100.0f;
 
     x = ( ( float ) midPoint.x + sm.dx ) / ( ( float ) screenSize.x );
-    y = ( ( float ) midPoint.y + sm.dy - 50 ) / ( ( float ) screenSize.y );
+    y = ( ( float ) midPoint.y + sm.dy ) / ( ( float ) screenSize.y );
 
     inputAddMouseMoveAbsolute( ( int ) ( x * 65535.0f ), ( int ) ( y * 65535.0f ) );
 }
@@ -106,8 +109,10 @@ static void onStartButtonDown( void ) {
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
         inputAddKeyDownEvent( vkey ); \
         inputAddKeyUpEvent( vkey ); \
-        inputAddMouseRightButton( true ); \
-        inputAddMouseRightButton( false ); \
+        if ( isActionButton ) { \
+            inputAddMouseRightButton( true ); \
+            inputAddMouseRightButton( false ); \
+        } \
     }
 
 MakeKeyFunc( XINPUT_GAMEPAD_B, VK_F1, VK_F5, true, onBButtonDown );
