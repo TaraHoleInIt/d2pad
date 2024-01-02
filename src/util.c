@@ -59,6 +59,7 @@ void utilDebugMessage( const wchar_t* fmt, ... ) {
 }
 
 void utilCreateDebugConsole( void ) {
+#ifdef _DEBUG
     if ( AllocConsole( ) ) {
         conStdout = GetStdHandle( STD_OUTPUT_HANDLE );
 
@@ -66,9 +67,12 @@ void utilCreateDebugConsole( void ) {
             utilDebugMessage( L"Debug console created.\n" );
         }
     }
+#endif
 }
 
 void utilCloseDebugConsole( void ) {
+#ifdef _DEBUG
     conStdout = INVALID_HANDLE_VALUE;
     FreeConsole( );
+#endif
 }

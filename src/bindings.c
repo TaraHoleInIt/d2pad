@@ -48,7 +48,7 @@ static void onLeftClickUp( void ) {
 }
 
 static void onLeftStickStartedMoving( void ) {
-    utilDebugMessage( L"onLeftStickStartedMoving\n" );
+    debugMessage( L"onLeftStickStartedMoving\n" );
     inputAddMouseLeftButton( true );
 }
 
@@ -58,7 +58,7 @@ static void onLeftStickStoppedMoving( void ) {
     float x = 0.0f;
     float y = 0.0f;
 
-    utilDebugMessage( L"onLeftStickStoppedMoving\n" );
+    debugMessage( L"onLeftStickStoppedMoving\n" );
     inputAddMouseLeftButton( false );
 
     utilGetScreenSize( diabloWindow, &screenSize );

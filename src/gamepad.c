@@ -88,15 +88,6 @@ static float normalizeStick( SHORT stickValue ) {
     return ( ( float ) stickValue ) / 32768.0f;
 }
 
-static void printBinary32( uint32_t b ) {
-    for ( int i = 0; i < 32; i++ ) {
-        utilDebugMessage( L"%c", ( b & 0x80000000 ) ? L'1' : L'0' );
-        b <<= 1;
-    }
-
-    utilDebugMessage( L"\n" );
-}
-
 void padUpdate( void ) {
     JoyToKeyEntry* bind = NULL;
     StickMovement ls;
