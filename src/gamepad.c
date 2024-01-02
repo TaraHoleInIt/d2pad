@@ -114,6 +114,7 @@ void padUpdate( void ) {
             curButtonState = curInputState.Gamepad.wButtons;
 
             curButtonState |= padIsStickMoving( &ls ) ? Button_LStickMoving : 0;
+            curButtonState |= padIsStickMoving( &rs ) ? Button_RStickMoving : 0;
             curButtonState |= ( curInputState.Gamepad.bLeftTrigger >= 64 ) ? Button_Meta : 0;
 
             keysHeld = curButtonState;

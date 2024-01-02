@@ -66,13 +66,6 @@ BOOL diaboInterfaceInit( void ) {
 }
 
 void mainThread( LPVOID param ) {
-    StickMovement ls;
-    StickMovement rs;
-    POINT screenSize;
-    POINT midPoint;
-    float x = 0.0f;
-    float y = 0.0f;
-
     padInit( );
     setDefaultKeyBinds( );
 
@@ -80,20 +73,8 @@ void mainThread( LPVOID param ) {
         diabloWindow = FindWindow( NULL, L"Diablo II" );//( *GetDiabloWindow ) ( );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
-            utilGetWindowMidpoint( diabloWindow, &midPoint );
-            utilGetScreenSize( diabloWindow, &screenSize );
-
             inputBegin( );
                 padUpdate( );
-                padGetLeftStick( &ls );
-                padGetRightStick( &rs );
-
-                if ( padIsStickMoving( &rs ) ) {
-                    inputAddMouseMoveRelative( 
-                        ( int ) ( rs.dx * Config_Cursor_Movement_Scale ), 
-                        ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
-                    );
-                }
             inputEnd( );
         }
 

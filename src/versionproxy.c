@@ -27,8 +27,6 @@ static void* addrVerLanguageNameW = NULL;
 static void* addrVerQueryValueA = NULL;
 static void* addrVerQueryValueW = NULL;
 
-// __pragma( comment( linker, "/EXPORT:" __FUNCDNAME__ "=" #realFuncName ) ); \
-
 #define initProxy( realFuncName ) addr##realFuncName = ( void* ) GetProcAddress( realVersionDll, ( LPCSTR ) #realFuncName )
 
 defineProxy( GetFileVersionInfoA, 1 );

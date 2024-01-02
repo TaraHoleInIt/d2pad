@@ -88,6 +88,25 @@ static void onLeftStickMoving( void ) {
     inputAddMouseMoveAbsolute( ( int ) ( x * 65535.0f ), ( int ) ( y * 65535.0f ) );
 }
 
+static void onRightStickStartedMoving( void ) {
+}
+
+static void onRightStickStoppedMoving( void ) {
+}
+
+static void onRightStickMoving( void ) {
+    StickMovement rs;
+
+    padGetRightStick( &rs );
+
+    if ( padIsStickMoving( &rs ) ) {
+        inputAddMouseMoveRelative(
+            ( int ) ( rs.dx * Config_Cursor_Movement_Scale ),
+            ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
+        );
+    }
+}
+
 static void onBackButtonDown( void ) {
     inputAddKeyDownEvent( VK_ESCAPE );
     inputAddKeyUpEvent( VK_ESCAPE );
@@ -129,6 +148,8 @@ MakeKeyFunc( XINPUT_GAMEPAD_RIGHT_THUMB, VK_TAB, VK_TAB, false, onRStickDown );
 
 void setDefaultKeyBinds( void ) {
     padAddBinding( Button_LStickMoving, onLeftStickStartedMoving, onLeftStickMoving, onLeftStickStoppedMoving );
+    padAddBinding( Button_RStickMoving, NULL, onRightStickMoving, NULL );
+
     padAddBinding( Config_Button_Click, onLeftClickDown, NULL, onLeftClickUp );
     padAddBinding( XINPUT_GAMEPAD_BACK, onBackButtonDown, NULL, NULL );
     padAddBinding( XINPUT_GAMEPAD_START, onStartButtonDown, NULL, NULL );
