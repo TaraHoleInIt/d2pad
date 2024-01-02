@@ -22,3 +22,6 @@
 // Source: https://stackoverflow.com/a/14421702
 #define StrWide1( s ) L##s
 #define StrWide( s ) StrWide1( s )
+
+void setDefaultKeyBinds( void );
+void versionProxyInit( void );

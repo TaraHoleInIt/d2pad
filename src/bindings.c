@@ -2,7 +2,6 @@
 #include "common.h"
 #include "gamepad.h"
 #include "util.h"
-#include "bindings.h"
 #include "input.h"
 
 static void onMetaKeyDown( void );

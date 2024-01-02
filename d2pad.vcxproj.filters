@@ -30,6 +30,9 @@
     <ClCompile Include="src\bindings.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\versionproxy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.h">
@@ -42,9 +45,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\bindings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
