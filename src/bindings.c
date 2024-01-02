@@ -13,6 +13,11 @@ static void onLeftStickStoppedMoving( void );
 static void onLeftStickMoving( void );
 static void onBackButtonDown( void );
 static void onStartButtonDown( void );
+static void onRightStickStartedMoving( void );
+static void onRightStickStoppedMoving( void );
+static void onRightStickMoving( void );
+static void onR2ButtonDown( void );
+static void onR2ButtonUp( void );
 
 extern HWND diabloWindow;
 
@@ -122,6 +127,14 @@ static void onStartButtonDown( void ) {
     inputAddKeyUpEvent( vkey );
 }
 
+static void onR2ButtonDown( void ) {
+    inputAddKeyDownEvent( VK_SHIFT );
+}
+
+static void onR2ButtonUp( void ) {
+    inputAddKeyUpEvent( VK_SHIFT );
+}
+
 #define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
     void funcName( void ) { \
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
@@ -168,4 +181,5 @@ void setDefaultKeyBinds( void ) {
     padAddBinding( XINPUT_GAMEPAD_RIGHT_THUMB, onRStickDown, NULL, NULL );
     
     padAddBinding( Button_Meta, onMetaKeyDown, NULL, onMetaKeyUp );
+    padAddBinding( Button_R2, onR2ButtonDown, NULL, onR2ButtonUp );
 }

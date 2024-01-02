@@ -26,7 +26,7 @@ typedef struct {
 #define Button_Meta 0x80000000
 #define Button_LStickMoving 0x40000000
 #define Button_RStickMoving 0x20000000
-#define Button_Z 0x10000000
+#define Button_R2 0x10000000
 
 void padInit( void );
 void padGetLeftStick( StickMovement* mov );
