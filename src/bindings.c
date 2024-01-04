@@ -4,6 +4,17 @@
 #include "util.h"
 #include "input.h"
 
+#define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
+    void funcName( void ) { \
+        int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
+        inputAddKeyDownEvent( vkey ); \
+        inputAddKeyUpEvent( vkey ); \
+        if ( isActionButton ) { \
+            inputAddMouseRightButton( true ); \
+            inputAddMouseRightButton( false ); \
+        } \
+    }
+
 static void onMetaKeyDown( void );
 static void onMetaKeyUp( void );
 static void onLeftClickDown( void );
@@ -11,8 +22,6 @@ static void onLeftClickUp( void );
 static void onLeftStickStartedMoving( void );
 static void onLeftStickStoppedMoving( void );
 static void onLeftStickMoving( void );
-static void onBackButtonDown( void );
-static void onStartButtonDown( void );
 static void onRightStickStartedMoving( void );
 static void onRightStickStoppedMoving( void );
 static void onRightStickMoving( void );
@@ -112,21 +121,6 @@ static void onRightStickMoving( void ) {
     }
 }
 
-static void onBackButtonDown( void ) {
-    inputAddKeyDownEvent( VK_ESCAPE );
-    inputAddKeyUpEvent( VK_ESCAPE );
-}
-
-static void onStartButtonDown( void ) {
-    int vkey = ( isMeta ) ? 
-        'A' :
-        'I'
-    ;
-
-    inputAddKeyDownEvent( vkey );
-    inputAddKeyUpEvent( vkey );
-}
-
 static void onR2ButtonDown( void ) {
     inputAddKeyDownEvent( VK_SHIFT );
 }
@@ -134,17 +128,6 @@ static void onR2ButtonDown( void ) {
 static void onR2ButtonUp( void ) {
     inputAddKeyUpEvent( VK_SHIFT );
 }
-
-#define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
-    void funcName( void ) { \
-        int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
-        inputAddKeyDownEvent( vkey ); \
-        inputAddKeyUpEvent( vkey ); \
-        if ( isActionButton ) { \
-            inputAddMouseRightButton( true ); \
-            inputAddMouseRightButton( false ); \
-        } \
-    }
 
 MakeKeyFunc( XINPUT_GAMEPAD_B, VK_F1, VK_F5, true, onBButtonDown );
 MakeKeyFunc( XINPUT_GAMEPAD_A, VK_F2, VK_F6, true, onAButtonDown );
@@ -158,6 +141,11 @@ MakeKeyFunc( XINPUT_GAMEPAD_DPAD_UP, '4', '4', false, onDpadUpDown );
 
 MakeKeyFunc( XINPUT_GAMEPAD_LEFT_THUMB, 'R', 'R', false, onLStickDown );
 MakeKeyFunc( XINPUT_GAMEPAD_RIGHT_THUMB, VK_TAB, VK_TAB, false, onRStickDown );
+
+MakeKeyFunc( XINPUT_GAMEPAD_START, 'I', 'A', false, onStartButtonDown );
+MakeKeyFunc( XINPUT_GAMEPAD_BACK, VK_ESCAPE, VK_ESCAPE, false, onBackButtonDown );
+
+MakeKeyFunc( XINPUT_GAMEPAD_LEFT_SHOULDER, 0, 'W', false, onLButtonDown );
 
 void setDefaultKeyBinds( void ) {
     padAddBinding( Button_LStickMoving, onLeftStickStartedMoving, onLeftStickMoving, onLeftStickStoppedMoving );
@@ -182,4 +170,6 @@ void setDefaultKeyBinds( void ) {
     
     padAddBinding( Button_Meta, onMetaKeyDown, NULL, onMetaKeyUp );
     padAddBinding( Button_R2, onR2ButtonDown, NULL, onR2ButtonUp );
+
+    padAddBinding( XINPUT_GAMEPAD_LEFT_SHOULDER, onLButtonDown, NULL, NULL );
 }

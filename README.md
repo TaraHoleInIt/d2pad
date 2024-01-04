@@ -31,7 +31,7 @@ L3: Toggle automap
 Back: Mapped to ESC  
 Start: Open inventory  
   
-R1: Unbound  
+L1: Unbound  
 R2: Left click  
   
 Meta + R2: Right click  
@@ -40,3 +40,4 @@ Meta + B: Skill 5
 Meta + A: Skill 6  
 Meta + X: Skill 7  
 Meta + Y: Skill 8  
+Meta + LB: Swap weapons

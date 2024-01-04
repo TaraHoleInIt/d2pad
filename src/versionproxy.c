@@ -68,24 +68,3 @@ void versionProxyInit( void ) {
         initProxy( VerQueryValueW );
     }
 }
-
-/*
-EXPORTS
-    proxyGetFileVersionInfoA
-    proxyGetFileVersionInfoByHandle
-    proxyGetFileVersionInfoExA
-    proxyGetFileVersionInfoExW
-    proxyGetFileVersionInfoSizeA
-    proxyGetFileVersionInfoSizeExA
-    proxyGetFileVersionInfoSizeExW
-    proxyGetFileVersionInfoSizeW
-    proxyGetFileVersionInfoW
-    proxyVerFindFileA
-    proxyVerFindFileW
-    proxyVerInstallFileA
-    proxyVerInstallFileW
-    proxyVerLanguageNameA
-    proxyVerLanguageNameW
-    proxyVerQueryValueA
-    proxyVerQueryValueW
-*/
