@@ -1,13 +1,23 @@
 #include <windows.h>
+#include "common.h"
+#include "util.h"
 
 static HMODULE realVersionDll = NULL;
 
+#if _MSC_VER
 // Source: https://stackoverflow.com/a/2805560
 #define defineProxy( realFuncName, ordinalNo ) \
 __declspec( naked ) void proxy##realFuncName( void ) { \
     __pragma( comment( linker, "/EXPORT:" #realFuncName "=" __FUNCDNAME__ ) ); \
     __asm jmp addr##realFuncName; \
 }
+#else
+// Source: https://stackoverflow.com/a/19827976
+#define defineProxy( realFuncName, ordinalNo ) \
+__declspec( naked ) void proxy##realFuncName( void ) { \
+    asm( "jmp *%0\n" : : "r" ( addr##realFuncName ) ); \
+}
+#endif
 
 static void* addrGetFileVersionInfoA = NULL;
 static void* addrGetFileVersionInfoByHandle = NULL;
@@ -66,5 +76,7 @@ void versionProxyInit( void ) {
         initProxy( VerLanguageNameW );
         initProxy( VerQueryValueA );
         initProxy( VerQueryValueW );
+
+        utilDebugMessage( MakeWideStr( "Version.dll proxy is ready.\n" ) );
     }
 }

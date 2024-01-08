@@ -1,22 +1,22 @@
 #include <windows.h>
 #include "common.h"
 
-static void setupKeyEvent( INPUT* eventPtr, int keyCode, bool isDown );
+//static void setupKeyEvent( INPUT* eventPtr, int keyCode, bool isDown );
 static void setupMouseMoveRelative( INPUT* eventPtr, uint32_t dx, uint32_t dy, uint32_t flags );
 static void setupMouseMoveAbsolute( INPUT* eventPtr, uint32_t x, uint32_t y, uint32_t flags );
 
 static INPUT eventList[ Config_Max_Input_Events ];
 static int eventCount = 0;
 
-static void setupKeyEvent( INPUT* eventPtr, int keyCode, bool isDown ) {
-    if ( eventPtr ) {
-        memset( eventPtr, 0, sizeof( INPUT ) );
-
-        eventPtr->type = INPUT_KEYBOARD;
-        eventPtr->ki.wScan = keyCode;
-        eventPtr->ki.dwFlags = ( ( isDown == FALSE ) ? KEYEVENTF_KEYUP : 0 ) | KEYEVENTF_SCANCODE;
-    }
-}
+//static void setupKeyEvent( INPUT* eventPtr, int keyCode, bool isDown ) {
+//    if ( eventPtr ) {
+//        memset( eventPtr, 0, sizeof( INPUT ) );
+//
+//        eventPtr->type = INPUT_KEYBOARD;
+//        eventPtr->ki.wScan = keyCode;
+//        eventPtr->ki.dwFlags = ( ( isDown == FALSE ) ? KEYEVENTF_KEYUP : 0 ) | KEYEVENTF_SCANCODE;
+//    }
+//}
 
 static void setupMouseMoveRelative( INPUT* eventPtr, uint32_t dx, uint32_t dy, uint32_t flags ) {
     if ( eventPtr ) {

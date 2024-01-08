@@ -7,7 +7,7 @@
 #define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
     void funcName( void ) { \
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
-        debugMessage( L""__FUNCTION__ ); \
+        debugMessage( MakeWideStr( __FUNCTION__ "\n" ) ); \
         inputAddKeyDownEvent( vkey ); \
         inputAddKeyUpEvent( vkey ); \
         if ( isActionButton ) { \
@@ -23,8 +23,6 @@ static void onLeftClickUp( void );
 static void onLeftStickStartedMoving( void );
 static void onLeftStickStoppedMoving( void );
 static void onLeftStickMoving( void );
-static void onRightStickStartedMoving( void );
-static void onRightStickStoppedMoving( void );
 static void onRightStickMoving( void );
 static void onR2ButtonDown( void );
 static void onR2ButtonUp( void );
@@ -34,17 +32,17 @@ extern HWND diabloWindow;
 static bool isMeta = false;
 
 static void onMetaKeyDown( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
     isMeta = true;
 }
 
 static void onMetaKeyUp( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
     isMeta = false;
 }
 
 static void onLeftClickDown( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
 
     if ( isMeta ) {
         inputAddMouseRightButton( true );
@@ -54,7 +52,7 @@ static void onLeftClickDown( void ) {
 }
 
 static void onLeftClickUp( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
 
     if ( isMeta ) {
         inputAddMouseRightButton( false );
@@ -73,7 +71,7 @@ static void onLeftStickStoppedMoving( void ) {
     float x = 0.0f;
     float y = 0.0f;
 
-    debugMessage( L"onLeftStickStoppedMoving\n" );
+    debugMessage( MakeWideStr("onLeftStickStoppedMoving\n" ) );
     inputAddMouseLeftButton( false );
 
     utilGetScreenSize( diabloWindow, &screenSize );
@@ -107,13 +105,7 @@ static void onLeftStickMoving( void ) {
 
     inputAddMouseMoveAbsolute( ( int ) ( x * 65535.0f ), ( int ) ( y * 65535.0f ) );
 
-    debugMessage( L"Left stick moving; deltas: %.2f, %.2f\n", sm.dx, sm.dy );
-}
-
-static void onRightStickStartedMoving( void ) {
-}
-
-static void onRightStickStoppedMoving( void ) {
+    debugMessage( MakeWideStr("Left stick moving; deltas: %.2f, %.2f\n" ), sm.dx, sm.dy );
 }
 
 static void onRightStickMoving( void ) {
@@ -127,17 +119,17 @@ static void onRightStickMoving( void ) {
             ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
         );
 
-        debugMessage( L"Right stick moving; deltas: %.2f, %.2f\n", rs.dx, rs.dy );
+        debugMessage( MakeWideStr( "Right stick moving; deltas: %.2f, %.2f\n" ), rs.dx, rs.dy );
     }
 }
 
 static void onR2ButtonDown( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
     inputAddKeyDownEvent( VK_SHIFT );
 }
 
 static void onR2ButtonUp( void ) {
-    debugMessage( L""__FUNCTION__ );
+    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
     inputAddKeyUpEvent( VK_SHIFT );
 }
 

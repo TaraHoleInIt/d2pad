@@ -22,9 +22,6 @@ static uint32_t curButtonState = 0;
 static JoyToKeyEntry keyBindingTable[ Config_Max_Key_Bindings ];
 static int keyBindingCount = 0;
 
-static bool lastLeftStickMoving = false;
-static bool lastRightStickMoving = false;
-
 static int padGetFirstController( void ) {
     XINPUT_STATE xst;
 

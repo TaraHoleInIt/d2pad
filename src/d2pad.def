@@ -1,0 +1,19 @@
+LIBRARY version.dll
+EXPORTS
+	GetFileVersionInfoA=proxyGetFileVersionInfoA
+	GetFileVersionInfoByHandle=proxyGetFileVersionInfoByHandle
+	GetFileVersionInfoExA=proxyGetFileVersionInfoExA
+	GetFileVersionInfoExW=proxyGetFileVersionInfoExW
+	GetFileVersionInfoSizeA=proxyGetFileVersionInfoSizeA
+	GetFileVersionInfoSizeExA=proxyGetFileVersionInfoSizeExA
+	GetFileVersionInfoSizeExW=proxyGetFileVersionInfoSizeExW
+	GetFileVersionInfoSizeW=proxyGetFileVersionInfoSizeW
+	GetFileVersionInfoW=proxyGetFileVersionInfoW
+	VerFindFileA=proxyVerFindFileA
+	VerFindFileW=proxyVerFindFileW
+	VerInstallFileA=proxyVerInstallFileA
+	VerInstallFileW=proxyVerInstallFileW
+	VerLanguageNameA=proxyVerLanguageNameA
+	VerLanguageNameW=proxyVerLanguageNameW
+	VerQueryValueA=proxyVerQueryValueA
+	VerQueryValueW=proxyVerQueryValueW

@@ -70,7 +70,7 @@ void mainThread( LPVOID param ) {
     setDefaultKeyBinds( );
 
     while ( shouldRun == TRUE ) {
-        diabloWindow = FindWindow( NULL, L"Diablo II" );
+        diabloWindow = FindWindowW( NULL, MakeWideStr( "Diablo II" ) );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
             inputBegin( );
@@ -101,17 +101,17 @@ extern void versionProxyInit( void );
 BOOL WINAPI DllMain( HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved ) {
     switch ( dwReason ) {
         case DLL_PROCESS_ATTACH: {
-            versionProxyInit( );
             utilCreateDebugConsole( );
+            versionProxyInit( );
 
             if ( diaboInterfaceInit( ) ) {
-                createMainThread( );
+                //createMainThread( );
             }
 
             break;
         }
         case DLL_PROCESS_DETACH: {
-            closeMainThread( );
+            //closeMainThread( );
             utilCloseDebugConsole( );
 
             break;
