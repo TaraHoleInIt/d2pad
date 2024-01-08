@@ -105,13 +105,13 @@ BOOL WINAPI DllMain( HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved ) {
             versionProxyInit( );
 
             if ( diaboInterfaceInit( ) ) {
-                //createMainThread( );
+                createMainThread( );
             }
 
             break;
         }
         case DLL_PROCESS_DETACH: {
-            //closeMainThread( );
+            closeMainThread( );
             utilCloseDebugConsole( );
 
             break;
