@@ -7,6 +7,7 @@
 #define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
     void funcName( void ) { \
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
+        debugMessage( L""__FUNCTION__ ); \
         inputAddKeyDownEvent( vkey ); \
         inputAddKeyUpEvent( vkey ); \
         if ( isActionButton ) { \
@@ -33,14 +34,18 @@ extern HWND diabloWindow;
 static bool isMeta = false;
 
 static void onMetaKeyDown( void ) {
+    debugMessage( L""__FUNCTION__ );
     isMeta = true;
 }
 
 static void onMetaKeyUp( void ) {
+    debugMessage( L""__FUNCTION__ );
     isMeta = false;
 }
 
 static void onLeftClickDown( void ) {
+    debugMessage( L""__FUNCTION__ );
+
     if ( isMeta ) {
         inputAddMouseRightButton( true );
     } else {
@@ -49,6 +54,8 @@ static void onLeftClickDown( void ) {
 }
 
 static void onLeftClickUp( void ) {
+    debugMessage( L""__FUNCTION__ );
+
     if ( isMeta ) {
         inputAddMouseRightButton( false );
     } else {
@@ -57,7 +64,6 @@ static void onLeftClickUp( void ) {
 }
 
 static void onLeftStickStartedMoving( void ) {
-    debugMessage( L"onLeftStickStartedMoving\n" );
     inputAddMouseLeftButton( true );
 }
 
@@ -100,6 +106,8 @@ static void onLeftStickMoving( void ) {
     y = ( ( float ) midPoint.y + sm.dy ) / ( ( float ) screenSize.y );
 
     inputAddMouseMoveAbsolute( ( int ) ( x * 65535.0f ), ( int ) ( y * 65535.0f ) );
+
+    debugMessage( L"Left stick moving; deltas: %.2f, %.2f\n", sm.dx, sm.dy );
 }
 
 static void onRightStickStartedMoving( void ) {
@@ -118,14 +126,18 @@ static void onRightStickMoving( void ) {
             ( int ) ( rs.dx * Config_Cursor_Movement_Scale ),
             ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
         );
+
+        debugMessage( L"Right stick moving; deltas: %.2f, %.2f\n", rs.dx, rs.dy );
     }
 }
 
 static void onR2ButtonDown( void ) {
+    debugMessage( L""__FUNCTION__ );
     inputAddKeyDownEvent( VK_SHIFT );
 }
 
 static void onR2ButtonUp( void ) {
+    debugMessage( L""__FUNCTION__ );
     inputAddKeyUpEvent( VK_SHIFT );
 }
 

@@ -14,6 +14,7 @@
 #define Config_Max_Key_Bindings 32
 #define Config_Movement_Thresh 0.15f
 #define Config_Cursor_Movement_Scale 6.0f
+#define Config_Update_Rate 10
 
 #define Config_Cursor_Stick Stick_Right
 #define Config_Movement_Stick Stick_Left

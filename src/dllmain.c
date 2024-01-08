@@ -70,7 +70,7 @@ void mainThread( LPVOID param ) {
     setDefaultKeyBinds( );
 
     while ( shouldRun == TRUE ) {
-        diabloWindow = FindWindow( NULL, L"Diablo II" );//( *GetDiabloWindow ) ( );
+        diabloWindow = FindWindow( NULL, L"Diablo II" );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
             inputBegin( );
@@ -78,7 +78,7 @@ void mainThread( LPVOID param ) {
             inputEnd( );
         }
 
-        Sleep( 10 );
+        Sleep( Config_Update_Rate );
     }
 
     _endthread( );
