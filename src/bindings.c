@@ -7,7 +7,7 @@
 #define MakeKeyFunc( xInputButton, vKeyNormal, vKeyMeta, isActionButton, funcName ) \
     void funcName( void ) { \
         int vkey = ( isMeta ) ? vKeyMeta : vKeyNormal; \
-        debugMessage( MakeWideStr( __FUNCTION__ "\n" ) ); \
+        printFunction( ); \
         inputAddKeyDownEvent( vkey ); \
         inputAddKeyUpEvent( vkey ); \
         if ( isActionButton ) { \
@@ -32,17 +32,17 @@ extern HWND diabloWindow;
 static bool isMeta = false;
 
 static void onMetaKeyDown( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
     isMeta = true;
 }
 
 static void onMetaKeyUp( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
     isMeta = false;
 }
 
 static void onLeftClickDown( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
 
     if ( isMeta ) {
         inputAddMouseRightButton( true );
@@ -52,7 +52,7 @@ static void onLeftClickDown( void ) {
 }
 
 static void onLeftClickUp( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
 
     if ( isMeta ) {
         inputAddMouseRightButton( false );
@@ -71,7 +71,7 @@ static void onLeftStickStoppedMoving( void ) {
     float x = 0.0f;
     float y = 0.0f;
 
-    debugMessage( MakeWideStr("onLeftStickStoppedMoving\n" ) );
+    printFunction( );
     inputAddMouseLeftButton( false );
 
     utilGetScreenSize( diabloWindow, &screenSize );
@@ -105,7 +105,7 @@ static void onLeftStickMoving( void ) {
 
     inputAddMouseMoveAbsolute( ( int ) ( x * 65535.0f ), ( int ) ( y * 65535.0f ) );
 
-    debugMessage( MakeWideStr("Left stick moving; deltas: %.2f, %.2f\n" ), sm.dx, sm.dy );
+    debugMessage( StrWide( "Left stick moving; deltas: %.2f, %.2f\n" ), sm.dx, sm.dy );
 }
 
 static void onRightStickMoving( void ) {
@@ -119,17 +119,17 @@ static void onRightStickMoving( void ) {
             ( int ) ( rs.dy * Config_Cursor_Movement_Scale )
         );
 
-        debugMessage( MakeWideStr( "Right stick moving; deltas: %.2f, %.2f\n" ), rs.dx, rs.dy );
+        debugMessage( StrWide( "Right stick moving; deltas: %.2f, %.2f\n" ), rs.dx, rs.dy );
     }
 }
 
 static void onR2ButtonDown( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
     inputAddKeyDownEvent( VK_SHIFT );
 }
 
 static void onR2ButtonUp( void ) {
-    debugMessage( MakeWideStr( __FUNCTION__ "\n" ) );
+    printFunction( );
     inputAddKeyUpEvent( VK_SHIFT );
 }
 

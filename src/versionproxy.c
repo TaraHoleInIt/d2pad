@@ -77,6 +77,6 @@ void versionProxyInit( void ) {
         initProxy( VerQueryValueA );
         initProxy( VerQueryValueW );
 
-        utilDebugMessage( MakeWideStr( "Version.dll proxy is ready.\n" ) );
+        utilDebugMessage( StrWide( "Version.dll proxy is ready.\n" ) );
     }
 }

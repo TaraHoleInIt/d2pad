@@ -70,7 +70,7 @@ void mainThread( LPVOID param ) {
     setDefaultKeyBinds( );
 
     while ( shouldRun == TRUE ) {
-        diabloWindow = FindWindowW( NULL, MakeWideStr( "Diablo II" ) );
+        diabloWindow = FindWindowW( NULL, StrWide( "Diablo II" ) );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
             inputBegin( );
