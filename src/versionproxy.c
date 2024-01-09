@@ -1,6 +1,7 @@
 #include <windows.h>
 #include "common.h"
 #include "util.h"
+#include "versionproxy.h"
 
 static HMODULE realVersionDll = NULL;
 
@@ -19,23 +20,23 @@ __declspec( naked ) void proxy##realFuncName( void ) { \
 }
 #endif
 
-static void* addrGetFileVersionInfoA = NULL;
-static void* addrGetFileVersionInfoByHandle = NULL;
-static void* addrGetFileVersionInfoExA = NULL;
-static void* addrGetFileVersionInfoExW = NULL;
-static void* addrGetFileVersionInfoSizeA = NULL;
-static void* addrGetFileVersionInfoSizeExA = NULL;
-static void* addrGetFileVersionInfoSizeExW = NULL;
-static void* addrGetFileVersionInfoSizeW = NULL;
-static void* addrGetFileVersionInfoW = NULL;
-static void* addrVerFindFileA = NULL;
-static void* addrVerFindFileW = NULL;
-static void* addrVerInstallFileA = NULL;
-static void* addrVerInstallFileW = NULL;
-static void* addrVerLanguageNameA = NULL;
-static void* addrVerLanguageNameW = NULL;
-static void* addrVerQueryValueA = NULL;
-static void* addrVerQueryValueW = NULL;
+void* addrGetFileVersionInfoA = NULL;
+void* addrGetFileVersionInfoByHandle = NULL;
+void* addrGetFileVersionInfoExA = NULL;
+void* addrGetFileVersionInfoExW = NULL;
+void* addrGetFileVersionInfoSizeA = NULL;
+void* addrGetFileVersionInfoSizeExA = NULL;
+void* addrGetFileVersionInfoSizeExW = NULL;
+GetFileVersionInfoSizeWProc addrGetFileVersionInfoSizeW = NULL;
+GetFileVersionInfoWProc addrGetFileVersionInfoW = NULL;
+void* addrVerFindFileA = NULL;
+void* addrVerFindFileW = NULL;
+void* addrVerInstallFileA = NULL;
+void* addrVerInstallFileW = NULL;
+void* addrVerLanguageNameA = NULL;
+void* addrVerLanguageNameW = NULL;
+void* addrVerQueryValueA = NULL;
+VerQueryValueWProc addrVerQueryValueW = NULL;
 
 #define initProxy( realFuncName ) addr##realFuncName = ( void* ) GetProcAddress( realVersionDll, ( LPCSTR ) #realFuncName )
 

@@ -5,9 +5,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-// Source: https://stackoverflow.com/a/40070413
-#define MakeWideStr( str ) L ## #str
-
 #define clamp( value, min, max ) { \
     ( value ) = ( ( value ) < min ) ? min : ( value ); \
     ( value ) = ( ( value ) > max ) ? max : ( value ); \

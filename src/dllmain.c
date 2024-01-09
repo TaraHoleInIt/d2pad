@@ -9,6 +9,7 @@
 #include "gamepad.h"
 #include "input.h"
 #include "util.h"
+#include "versionproxy.h"
 
 typedef struct {
     int ordinal;
@@ -22,28 +23,21 @@ void mainThread( LPVOID param );
 BOOL createMainThread( void );
 BOOL diaboInterfaceInit( void );
 
-GetDiabloWindowProc GetDiabloWindow = NULL;
+GetDiabloWindowProc gfxGetGameWindow = NULL;
 
 HANDLE mainThreadHandle = NULL;
 HWND diabloWindow = NULL;
 BOOL shouldRun = FALSE;
 
-// Offsets for LoD 1.09d
-int* cursorX = ( int* ) 0x6F9018A0;
-int* cursorY = ( int* ) 0x6F9018A4;
-int* lButtonDown = ( int* ) 0x6F9018DC;
-int* isInGame = ( int* ) 0x6FA6608C;
-
-int* shouldDrawCursor = ( int* ) 0x6fbcb188;
-
 HMODULE dllD2Gfx = NULL;
 HMODULE dllD2Win = NULL;
 
+// Ordinals for 1.13
 D2Import importTable[ ] = {
     {
-        10027,
+        10048,
         &dllD2Gfx,
-        ( void** ) &GetDiabloWindow
+        ( void** ) &gfxGetGameWindow
     }
 };
 
@@ -65,12 +59,46 @@ BOOL diaboInterfaceInit( void ) {
     return dllD2Gfx && dllD2Win;
 }
 
+uint64_t getDiabloVersion( void ) {
+    VS_FIXEDFILEINFO* fileInfoPtr = NULL;
+    static wchar_t modulePath[ 256 ];
+    void* versionInfoBuffer = NULL;
+    DWORD versionInfoSize = 0;
+    DWORD versionLength = 0;
+    uint64_t version = 0;
+
+    // Get path of the EXE that loaded us (game.exe)
+    GetModuleFileNameW( NULL, modulePath, _countof( modulePath ) );
+
+    if ( ( versionInfoSize = ( *addrGetFileVersionInfoSizeW ) ( modulePath, NULL ) ) > 0 ) {
+        if ( ( versionInfoBuffer = malloc( versionInfoSize ) ) != NULL ) {
+            if ( ( *addrGetFileVersionInfoW ) ( modulePath, 0, versionInfoSize, versionInfoBuffer ) ) {
+                // its this
+                ( *addrVerQueryValueW ) ( versionInfoBuffer, StrWide( "\\" ), ( LPVOID* ) &fileInfoPtr, ( PUINT ) & versionLength );
+                version = ( ( uint64_t ) fileInfoPtr->dwFileVersionMS << 32 ) | fileInfoPtr->dwFileVersionLS;
+            }
+
+            free( versionInfoBuffer );
+        }
+    }
+
+    return version;
+}
+
 void mainThread( LPVOID param ) {
+    uint64_t version = 0;
+
     padInit( );
     setDefaultKeyBinds( );
 
+    printFunction( );
+
+    version = getDiabloVersion( );
+
+    debugMessage( StrWide( "Hi 0x%08llX\n" ), version );
+
     while ( shouldRun == TRUE ) {
-        diabloWindow = FindWindowW( NULL, StrWide( "Diablo II" ) );
+        diabloWindow = ( *gfxGetGameWindow ) ( );
 
         if ( diabloWindow /*&& diabloWindow == GetFocus( )*/ ) {
             inputBegin( );

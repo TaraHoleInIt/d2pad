@@ -8,7 +8,7 @@
 #define debugMessage( ... )
 #endif
 
-#define printFunction( ) utilDebugMessage( StrWide( "%s\n" ), __FUNCTION__ )
+#define printFunction( ) utilDebugMessage( StrWide( "%S\n" ), __FUNCTION__ )
 
 void utilGetScreenSize( HWND forWindow, POINT* screenSize );
 void utilGetWindowMidpoint( HWND hWnd, POINT* midPoint );

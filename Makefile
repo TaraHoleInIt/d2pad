@@ -3,7 +3,7 @@
 CC=i686-w64-mingw32-gcc
 CFLAGS=-g -m32 -D_DEBUG -Wall -Werror -static
 LDFLAGS=-mdll -g -static -Bstatic
-LIBS=-lxinput
+LIBS=-lxinput -lversion
 OUTPUT_FILE=version.dll
 
 srcFiles = $(wildcard src/*.c)

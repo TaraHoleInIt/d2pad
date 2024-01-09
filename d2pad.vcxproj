@@ -39,6 +39,7 @@
     <ClInclude Include="src\gamepad.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\util.h" />
+    <ClInclude Include="src\versionproxy.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="LICENSE.txt" />
