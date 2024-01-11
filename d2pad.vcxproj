@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bindings.c" />
+    <ClCompile Include="src\diablo.c" />
     <ClCompile Include="src\dllmain.c" />
     <ClCompile Include="src\gamepad.c" />
     <ClCompile Include="src\input.c" />
@@ -36,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\diablo.h" />
     <ClInclude Include="src\gamepad.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\util.h" />

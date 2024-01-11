@@ -33,6 +33,9 @@
     <ClCompile Include="src\versionproxy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\diablo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\versionproxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\diablo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
