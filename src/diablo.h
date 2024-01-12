@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+#define Diablo_II_1_13c 0x10000000D003C
+
 typedef struct {
     int ordinal;
     HMODULE* module;

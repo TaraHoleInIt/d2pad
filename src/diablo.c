@@ -13,7 +13,7 @@ HMODULE dllD2Gfx = NULL;
 HMODULE dllD2Win = NULL;
 
 // Ordinals for 1.13
-D2Import importTable[ ] = {
+static D2Import importTable_1_13c[ ] = {
     {
         10048,
         &dllD2Gfx,
@@ -21,18 +21,42 @@ D2Import importTable[ ] = {
     }
 };
 
+static int importTableCount_1_13c = _countof( importTable_1_13c );
+
+static D2Import* importTable = NULL;
+static int importTableCount = 0;
+
 bool diaboInterfaceInit( void ) {
+    uint64_t diabloVersion = 0;
     int i = 0;
 
     dllD2Gfx = GetModuleHandleW( L"d2gfx.dll" );
     dllD2Win = GetModuleHandleW( L"d2win.dll" );
 
-    for ( ; i < _countof( importTable ); i++ ) {
-        if ( importTable[ i ].module && importTable[ i ].proc ) {
-            *importTable[ i ].proc = ( void* ) GetProcAddress(
-                *importTable[ i ].module,
-                ( LPCSTR ) importTable[ i ].ordinal
-            );
+    diabloVersion = getDiabloVersion( );
+
+    switch ( diabloVersion ) {
+        case Diablo_II_1_13c: {
+            debugMessage( StrWide( "Detected Diablo II version 1.13c\n" ) );
+
+            importTableCount = importTableCount_1_13c;
+            importTable = importTable_1_13c;
+            break;
+        }
+        default: {
+            debugMessage( StrWide( "Unrecognized Diablo II version 0x%16llX\n" ), diabloVersion );
+            break;
+        }
+    };
+
+    if ( importTable && importTableCount ) {
+        for ( ; i < importTableCount; i++ ) {
+            if ( importTable[ i ].module && importTable[ i ].proc ) {
+                *importTable[ i ].proc = ( void* ) GetProcAddress(
+                    *importTable[ i ].module,
+                    ( LPCSTR ) importTable[ i ].ordinal
+                );
+            }
         }
     }
 
