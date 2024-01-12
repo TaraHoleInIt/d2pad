@@ -4,10 +4,11 @@
 #include "diablo.h"
 #include "versionproxy.h"
 
+static HWND WINAPI fallbackGetGameWindow( void );
 static uint64_t getDiabloVersion( void );
 bool diaboInterfaceInit( void );
 
-GetDiabloWindowProc gfxGetGameWindow = NULL;
+GetDiabloWindowProc gfxGetGameWindow = fallbackGetGameWindow;
 
 HMODULE dllD2Gfx = NULL;
 HMODULE dllD2Win = NULL;
@@ -87,4 +88,8 @@ static uint64_t getDiabloVersion( void ) {
     }
 
     return version;
+}
+
+static HWND WINAPI fallbackGetGameWindow( void ) {
+    return FindWindowW( NULL, StrWide( "Diablo II" ) );
 }
